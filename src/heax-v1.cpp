@@ -67,7 +67,6 @@ String porta_r;
 int porta_i=1;
 
 String content;
-
 //----------------------------FUNÇÕES_SENSORIAMENTO-----------------------------
 void temp_dht()
 {
@@ -190,6 +189,7 @@ void webpage()
       EEPROM.write(372, temp_bmp180[0]);      //grava se foi checked temp_bmp180
       EEPROM.write(373, alt_bmp180[0]);       //grava se foi checked press_bmp180
       EEPROM.commit();
+      mqtt_memo();
       content = "<!DOCTYPE HTML>\r\n<html>";
       content += "<html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/>\r\n";
       content += "<title>SenseNode - Setup</title>";
@@ -243,6 +243,8 @@ void wifi_memo()
   {ssid_r += char(EEPROM.read(i));}
   for (int i = 34; i <(pass_comp+34); ++i)
   {pass_r += char(EEPROM.read(i));}
+
+  mqtt_memo();
 }
 //-------------------------RESGATA CREDENCIAIS MQTT----------------------------
 //Resgata da memória E2PROM emulada o BROKER e LOGIN salvos pelo usuário.
@@ -263,7 +265,8 @@ void mqtt_memo()
   {senha_r += char(EEPROM.read(i));}
 
   for (int i = 298; i <(porta_comp+298); ++i)
-  {//falta encontrar uma forma de converter text para int a ser usando em serServer().
+  {
+
   }
 }
 //-------------------------FUNÇÃO MODO PA---------------------------------------
@@ -300,7 +303,7 @@ void setup()
 
   if(digitalRead(14)==HIGH || EEPROM.read(380)==1)
   {
-    EEPROM.write(380, 0);
+    EEPROM.write(380, 0);Serial.println("Inside Config!");
     EEPROM.commit();
     rodaPA();
     delay(1000);
