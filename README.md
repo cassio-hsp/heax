@@ -1,4 +1,4 @@
-# heax
+# Heax Standalone Module
 Heax module firmware
 
 # HEAX 1- NodeMCU (ESP12e) + DHT11 + BMP180
