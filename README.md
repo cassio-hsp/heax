@@ -2,7 +2,7 @@
 Heax module firmware
 
 # HEAX 1- NodeMCU (ESP12e) + DHT11 + BMP180
-##Características:
+## Características:
 1. Cria página em Webserver dentro do PA gerado em modo config.
 2. Permite selecionar que dado dos sensores DHT e BMP serão enviados via MQTT.
 3. Comutação e reconexão automática pós finalização da  configuração.
